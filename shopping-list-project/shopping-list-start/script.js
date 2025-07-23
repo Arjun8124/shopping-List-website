@@ -4,6 +4,8 @@ const form = document.querySelector('#item-form');
 const list = document.querySelector('#item-list');
 const itemInput = document.querySelector('#item-input');
 const clearButton = document.querySelector('#clear');
+const filter = document.querySelector('#filter');
+const container = document.querySelector('.container');
 
 function onSubmit(e) {
   //preventing the submission of a form
@@ -29,6 +31,8 @@ function onSubmit(e) {
   li.appendChild(button);
   list.appendChild(li);
 
+  checkUI();
+
   itemInput.value = '';
 }
 
@@ -43,15 +47,30 @@ function Delete(e) {
     const li = e.target.parentElement;
     li.remove();
   }
+  checkUI();
 }
 
 //removing every element using the clearAll button
 function removeAll() {
-  while(list.firstChild){
-    list.removeChild(list.firstChild)
+  while (list.firstChild) {
+    list.removeChild(list.firstChild);
+  }
+  checkUI();
+}
+
+function checkUI() {
+  const items = list.querySelectorAll('li');
+  if (items.length === 0) {
+    filter.remove();
+    clearButton.remove();
+  } else if (items.length > 0) {
+    container.appendChild(filter);
+    container.appendChild(clearButton);
   }
 }
 
 clearButton.addEventListener('click', removeAll);
 list.addEventListener('click', Delete);
 form.addEventListener('submit', onSubmit);
+
+checkUI();
