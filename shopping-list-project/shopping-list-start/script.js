@@ -4,7 +4,6 @@ const form = document.querySelector('#item-form');
 const list = document.querySelector('#item-list');
 const itemInput = document.querySelector('#item-input');
 const clearButton = document.querySelector('#clear');
-const items = list.querySelectorAll('li');
 
 function onSubmit(e) {
   //preventing the submission of a form
@@ -48,7 +47,9 @@ function Delete(e) {
 
 //removing every element using the clearAll button
 function removeAll() {
-  items.forEach((item) => item.remove());
+  while(list.firstChild){
+    list.removeChild(list.firstChild)
+  }
 }
 
 clearButton.addEventListener('click', removeAll);
