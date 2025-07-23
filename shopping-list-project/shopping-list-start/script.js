@@ -69,6 +69,20 @@ function checkUI() {
   }
 }
 
+function onInput(e) {
+  const value = e.target.value.toLowerCase();
+  const items = list.querySelectorAll('li');
+  items.forEach((item) => {
+    const text = item.textContent.toLowerCase();
+    if (text.includes(value)) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+filter.addEventListener('input', onInput);
 clearButton.addEventListener('click', removeAll);
 list.addEventListener('click', Delete);
 form.addEventListener('submit', onSubmit);
